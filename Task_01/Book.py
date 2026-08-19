@@ -9,10 +9,6 @@ class Book:
     def isAvailable(self):
         return self.__isAvailable
 
-    @isAvailable.setter
-    def isAvailable(self, value):
-        self.__isAvailable = value
-
     @property
     def isbn(self):
         return self.__isbn
@@ -30,7 +26,7 @@ class Book:
         return f"- {self.title} by {self.author} (ISBN: {self.isbn})"
 
     def borrow(self):
-        self.isAvailable = False
+        self.__isAvailable = False
 
     def returnBook(self):
-        self.isAvailable = True
+        self.__isAvailable = True

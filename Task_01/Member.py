@@ -24,14 +24,14 @@ class Member:
         return self.__borrowLimit
 
 
-    def extractBooksTiltle(self):
+    def __extractBooksTiltle(self):
         booksTitles = ''
         for book in self.borrowBooks:
             booksTitles +=" " + book.title
         return booksTitles
 
     def getInfo(self):
-        return f"{self.name} with Id {self.memberId} borrowed {self.extractBooksTiltle()}"
+        return f"{self.name} with Id {self.memberId} borrowed {self.__extractBooksTiltle()}"
 
 
     def borrowBook(self, book):
