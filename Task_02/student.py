@@ -1,9 +1,9 @@
 class Student:
 
-    def __init__(self, name, email, grades, studentId):
+    def __init__(self, studentId, name, email):
         self.__name = name
         self.__email = email
-        self.__grades = grades # {'subject_name': grade}
+        self.__grades = {} # {'subject_name': grade}
         self.__studentId = studentId
 
     @property
@@ -13,6 +13,10 @@ class Student:
     @property
     def grades(self):
         return self.__grades
+
+    @property
+    def name(self):
+        return self.__name
     
 
     def addGrade(self, subject, grades):
@@ -25,27 +29,33 @@ class Student:
 
     def calculateAverage(self):
         grades = self.__grades.values()
-        return sum(grades)/len(grades)
+        return round(sum(grades)/len(grades), 2)
     
     def getLetterGrade(self): 
-        total = sum(self.__grades.values())
-        if 90 <= total:
+        stud_grade = self.calculateAverage()
+        
+        if 90 <= stud_grade:
             return 'A'
-        elif 80 <= total:
+        elif 80 <= stud_grade:
             return 'B'
-        elif 70 <= total:
+        elif 70 <= stud_grade:
             return 'C'
-        elif 60 <= total:
+        elif 60 <= stud_grade:
             return 'D'
         else:
             return 'F'
 
-    def getStudentInfo(self):
-        text = f"student name: {self.__name}\n \
-            student email: {self.__email} \n \
-        student grades: "
-
-        print(text)
-
+    def __print_grades(self):
+        text = ""
         for sub, grade in self.__grades.items():
-            print(f'    {sub}: {grade}')
+            text += f"\t{sub}: {grade}\n"
+        return text
+
+
+    def getStudentInfo(self):
+        text = f"=== Student Information === \nID: {self.__studentId} \nName: {self.__name} \nE-mail: {self.__email} \nGrades:\n{self.__print_grades()} "
+        return text
+
+
+    def getTotalScore (self):
+        return sum(self.__grades.values())
